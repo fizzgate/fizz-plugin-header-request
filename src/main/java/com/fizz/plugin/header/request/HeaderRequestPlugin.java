@@ -1,4 +1,4 @@
-package we.fizz.plugin.header.request;
+package com.fizz.plugin.header.request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,8 +13,6 @@ import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import we.fizz.plugin.header.request.PluginConfig.Header;
-import we.fizz.plugin.header.request.PluginConfig.Item;
 import we.plugin.FizzPluginFilter;
 import we.plugin.FizzPluginFilterChain;
 import we.plugin.auth.ApiConfig;
@@ -26,9 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static we.fizz.plugin.header.request.HeaderRequestPlugin.PLUGIN_NAME;
-import static we.fizz.plugin.header.request.PluginConfig.Action;
-import static we.fizz.plugin.header.request.PluginConfig.FieldName.CONFIG;
+import static com.fizz.plugin.header.request.HeaderRequestPlugin.PLUGIN_NAME;
 
 /**
  * @author hua.huang
@@ -36,7 +32,7 @@ import static we.fizz.plugin.header.request.PluginConfig.FieldName.CONFIG;
 @Slf4j
 @Component(value = PLUGIN_NAME)
 public class HeaderRequestPlugin implements FizzPluginFilter {
-    public static final String PLUGIN_NAME = "headerRequestPlugin";
+    public static final String PLUGIN_NAME = "fizz-plugin-header-request";
     @Resource
     private ObjectMapper objectMapper;
     @Resource
@@ -45,15 +41,15 @@ public class HeaderRequestPlugin implements FizzPluginFilter {
     @Override
     @SuppressWarnings("unchecked")
     public Mono<Void> filter(ServerWebExchange exchange, Map<String, Object> config) {
-        List<Header> routerConfig = routerConfig(config);
+        List<PluginConfig.Header> routerConfig = routerConfig(config);
         ApiConfig apiConfig = apiConfig(exchange);
-        List<Item> pluginConfig = pluginConfig(config);
-        List<Item> pluginConfigAllList = pluginConfig == null ? Lists.newArrayList() : pluginConfig;
+        List<PluginConfig.Item> pluginConfig = pluginConfig(config);
+        List<PluginConfig.Item> pluginConfigAllList = pluginConfig == null ? Lists.newArrayList() : pluginConfig;
         Set<String> gatewayGroups = apiConfig.gatewayGroups;
         gatewayGroups = gatewayGroups == null ? Sets.newHashSet() : gatewayGroups;
-        List<Header> headConfigs = Lists.newArrayList();
+        List<PluginConfig.Header> headConfigs = Lists.newArrayList();
         if (CollectionUtils.isNotEmpty(pluginConfigAllList)) {
-            for (Item item : pluginConfigAllList) {
+            for (PluginConfig.Item item : pluginConfigAllList) {
                 if (gatewayGroups.contains(item.getGwGroup())) {
                     if (CollectionUtils.isNotEmpty(item.getHeaders())) {
                         headConfigs.addAll(item.getHeaders());
@@ -74,23 +70,23 @@ public class HeaderRequestPlugin implements FizzPluginFilter {
         return FizzPluginFilterChain.next(newExchange);
     }
 
-    private void processHeader(HttpHeaders headers, List<Header> routerConfig, List<Header> pluginHeadConfigs) {
+    private void processHeader(HttpHeaders headers, List<PluginConfig.Header> routerConfig, List<PluginConfig.Header> pluginHeadConfigs) {
         // 因为路由配置优先于插件配置，所以先处理插件配置，再处理路由配置
-        for (Header pluginHeadConfig : pluginHeadConfigs) {
+        for (PluginConfig.Header pluginHeadConfig : pluginHeadConfigs) {
             processHeader(headers, pluginHeadConfig);
         }
         if (CollectionUtils.isNotEmpty(routerConfig)) {
-            for (Header head : routerConfig) {
+            for (PluginConfig.Header head : routerConfig) {
                 processHeader(headers, head);
             }
         }
     }
 
-    private void processHeader(HttpHeaders headers, Header head) {
+    private void processHeader(HttpHeaders headers, PluginConfig.Header head) {
         if (head == null) {
             return;
         }
-        Action action = head.getAction();
+        PluginConfig.Action action = head.getAction();
         String name = head.getName();
         String value = head.getValue();
         if (action == null || StringUtils.isBlank(name)) {
@@ -126,8 +122,8 @@ public class HeaderRequestPlugin implements FizzPluginFilter {
         }
     }
 
-    private List<Header> routerConfig(Map<String, Object> config) {
-        String configStr = (String) config.getOrDefault(CONFIG, StringUtils.EMPTY);
+    private List<PluginConfig.Header> routerConfig(Map<String, Object> config) {
+        String configStr = (String) config.getOrDefault(PluginConfig.FieldName.CONFIG, StringUtils.EMPTY);
         if (StringUtils.isBlank(configStr)) {
             return Lists.newArrayList();
         }

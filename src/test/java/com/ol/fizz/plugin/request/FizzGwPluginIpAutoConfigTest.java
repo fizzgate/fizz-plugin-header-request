@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import we.fizz.plugin.header.request.FizzGwPluginHeaderRequestAutoConfig;
+import com.fizz.plugin.header.request.FizzGwPluginHeaderRequestAutoConfig;
 
 import javax.annotation.Resource;
 

@@ -1,4 +1,4 @@
-package we.fizz.plugin.header.request;
+package com.fizz.plugin.header.request;
 
 import com.google.common.collect.Lists;
 import lombok.Data;
