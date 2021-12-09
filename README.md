@@ -9,7 +9,7 @@ title: HTTP请求头管理插件
 
 ## 插件说明
 
-Header Request Plugin插件，是一个非常简单的插件，API响应是指API网关返回客户端的响应，HTTP响应头是API响应中的一部分。您可以自定义HTTP响应头，在返回的API响应中指定您配置的响应头。
+Header Request Plugin插件，是一个非常简单的插件，API请求是指客户端到网关的请求，HTTP请求头是API请求中的一部分。您可以自定义HTTP请求头，在API请求中指定您配置的请求头。
 
 ## 使用说明
 I、gateway项目pom文件中引入以下依赖：
