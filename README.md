@@ -25,8 +25,7 @@ I、gateway项目pom文件中引入以下依赖：
 II. 管理后台导入以下SQL
 
  ```sql
-     INSERT INTO `tb_plugin` (`fixed_config`, `eng_name`, `chn_name`, `config`, `order`, `instruction`, `type`, `create_user`, `create_dept`, `create_time`, `update_user`, `update_time`, `status`, `is_deleted`) VALUES 
-     ('{"configs":[{"gwGroup":"fizz-gateway-plugin-example","headers":[{"name":"xxx-plugin-demo","value":"1234","action":"OVERRIDE"}]}]}', 'fizz-plugin-header-request', 'HTTP请求头管理插件', '[{"field":"config","label":"json配置","component":"textarea","dataType":"string","desc":"json配置","rules":[]}]', 1, '', 2, NULL, NULL, NULL, NULL, NULL, 1, 0);
+insert into `tb_plugin` (`fixed_config`, `id`, `eng_name`, `chn_name`, `config`, `order`, `instruction`, `type`, `create_user`, `create_dept`, `create_time`, `update_user`, `update_time`, `status`, `is_deleted`) values('{\"configs\":[{\"gwGroup\":\"default\",\"headers\":[{\"name\":\"hdr1\",\"value\":\"val1\",\"action\":\"ADD\"}]}]}','50','fizz_plugin_header_request','HTTP请求头管理插件','[{\"field\":\"config\",\"label\":\"json配置\",\"component\":\"textarea\",\"dataType\":\"string\",\"desc\":\"json配置\",\"rules\":[]}]','100',NULL,'2','1123598821738675201','1260823335286165505','2022-04-30 22:38:32','1123598821738675201','2022-04-30 22:38:32','1','0');
  ```
 
 更多网关二次开发请参考[网关快速开发](https://www.fizzgate.com/fizz/guide/fast-dev/fast-dev.html) 、[插件开发样例](https://www.fizzgate.com/fizz/guide/plugin/)
