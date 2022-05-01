@@ -32,7 +32,7 @@ import static com.fizz.plugin.header.request.HeaderRequestPlugin.PLUGIN_NAME;
 @Slf4j
 @Component(value = PLUGIN_NAME)
 public class HeaderRequestPlugin implements FizzPluginFilter {
-    public static final String PLUGIN_NAME = "fizz-plugin-header-request";
+    public static final String PLUGIN_NAME = "fizz_plugin_header_request";
     @Resource
     private ObjectMapper objectMapper;
     @Resource
