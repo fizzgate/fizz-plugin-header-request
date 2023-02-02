@@ -90,12 +90,12 @@
         </dependency>
     </dependencies>
 
-    <url>https://github.com/wehotel/fizz-gateway-community</url>
+    <url>https://github.com/fizzgate/fizz-gateway-community</url>
 
     <scm>
-        <url>https://github.com/wehotel/fizz-gateway-community</url>
-        <connection>scm:git:https://github.com/wehotel/fizz-gateway-community.git</connection>
-        <developerConnection>scm:git:https://github.com/wehotel/fizz-gateway-community.git</developerConnection>
+        <url>https://github.com/fizzgate/fizz-gateway-community</url>
+        <connection>scm:git:https://github.com/fizzgate/fizz-gateway-community.git</connection>
+        <developerConnection>scm:git:https://github.com/fizzgate/fizz-gateway-community.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
