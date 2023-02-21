@@ -12,7 +12,7 @@
 
     <groupId>com.fizzgate</groupId>
     <artifactId>fizz-plugin-header-request</artifactId>
-    <version>2.3.4-beta2</version>
+    <version>2.7.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -63,7 +63,7 @@
         <dependency>
             <groupId>com.fizzgate</groupId>
             <artifactId>fizz-spring-boot-starter</artifactId>
-            <version>2.3.4-beta2</version>
+            <version>2.7.1</version>
         </dependency>
 
         <dependency>

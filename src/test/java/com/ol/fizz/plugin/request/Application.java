@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext;
-import we.FizzAppContext;
-import we.config.AggregateRedisConfig;
-import we.log.LogSendAppender;
+import com.fizzgate.FizzAppContext;
+import com.fizzgate.config.AggregateRedisConfig;
+import com.fizzgate.log.LogSendAppender;
 
 /**
  * 启动类
